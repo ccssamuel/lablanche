@@ -695,6 +695,10 @@
 
   mobileLinks.forEach(a => a.addEventListener('click', closeMobile));
 
+  mobileNav.addEventListener('click', (e) => {
+    if (e.target === mobileNav) closeMobile();
+  });
+
   /* ── Reveal on scroll (Intersection Observer) ── */
   const revealObs = new IntersectionObserver((entries) => {
     entries.forEach(e => {
