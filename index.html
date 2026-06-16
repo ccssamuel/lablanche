@@ -204,6 +204,20 @@
     .menu-item:last-child{border-bottom:none}
     .menu-item-name{flex:1}
     .menu-item-price{color:var(--gold);font-weight:600;white-space:nowrap;font-size:.82rem}
+    @media(min-width:681px){
+      .menu-item{
+        transition: transform .2s var(--ease), opacity .2s var(--ease);
+      }
+      .menu-grid:hover .menu-item,
+      .menu-category-full:hover .menu-item{
+        opacity: 0.4;
+      }
+      .menu-grid:hover .menu-item:hover,
+      .menu-category-full:hover .menu-item:hover{
+        transform: scale(1.03);
+        opacity: 1;
+      }
+    }
 
     /* ══════════════════════════════════
        ABOUT
@@ -710,6 +724,25 @@
   }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
 
   document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+
+  /* ── Mobile scroll highlight for menu items ── */
+  const isTouchDevice = window.matchMedia('(hover: none)').matches;
+  if (isTouchDevice) {
+    const menuItems = document.querySelectorAll('.menu-item');
+    const menuObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.transform = 'scale(1.03)';
+          entry.target.style.transition = 'transform 0.7s ease';
+          entry.target.style.opacity = '1';
+        } else {
+          entry.target.style.transform = 'scale(1)';
+          entry.target.style.opacity = '1';
+        }
+      });
+    }, { threshold: 0.8 });
+    menuItems.forEach(item => menuObserver.observe(item));
+  }
 
   /* ── Active nav link ── */
   const sections = document.querySelectorAll('section[id], footer[id]');
