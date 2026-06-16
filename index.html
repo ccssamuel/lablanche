@@ -205,24 +205,18 @@
     .menu-item-name{flex:1}
     .menu-item-price{color:var(--gold);font-weight:600;white-space:nowrap;font-size:.82rem}
     @media(min-width:681px){
-      .menu-category{
-        transition: opacity .2s var(--ease);
-      }
-      .menu-grid:has(.menu-item:hover) .menu-category,
-      .menu-category-full:has(.menu-item:hover) .menu-category{
-        opacity: 0.4;
-      }
-      .menu-category:has(.menu-item:hover){
-        opacity: 1;
-      }
       .menu-category .menu-item{
         transition: opacity .2s var(--ease);
       }
       .menu-category:has(.menu-item:hover) .menu-item{
-        opacity: 0.4;
+        opacity: 0.35;
       }
       .menu-category:has(.menu-item:hover) .menu-item:hover{
-        opacity: 1;
+        opacity: 1 !important;
+      }
+      .menu-grid:has(.menu-item:hover) .menu-category:not(:has(.menu-item:hover)){
+        opacity: 0.35;
+        transition: opacity .2s var(--ease);
       }
     }
     /* ══════════════════════════════════
